@@ -1,6 +1,8 @@
 Install-Module xPSDesiredStateConfiguration -force
 Install-Module xNetworking -Force
 
+$ConfigPath = (Read-Host 'Please enter a config path')
+mkdir -Path $ConfigPath
 Configuration HyperVandNetworkingConfig
 {
     Param(
@@ -8,16 +10,18 @@ Configuration HyperVandNetworkingConfig
         [string]$Nodename = 'localhost',
 
         [ValidateNotNullOrEmpty()]
-        [string]$IPAddress,
+        [string]$IPAddress = '192.168.1.16',
 
         [ValidateNotNullOrEmpty()]
-        [string]$InterfaceAlias,
+        [string]$InterfaceAlias = 'Ethernet0',
 
         [ValidateNotNullOrEmpty()]
-        [int]$SubnetMask,
+        [int]$SubnetMask = '24',
 
         [ValidateNotNullOrEmpty()]
-        [string]$AddressFamily
+        [string]$AddressFamily = 'IPv4'
+
+
 
 
     )
@@ -32,14 +36,16 @@ Configuration HyperVandNetworkingConfig
             Ensure = 'present'
             Name = 'Hyper-V'
             IncludeAllSubFeature = $true
-            Credential = $Credential
         }
 
         xIPAddress NewIP
         {
-            IPAddress = "192.168.1.0"
-            InterfaceAlias = "Ethernet"
-            AddressFamily  = "IPV4"
+            IPAddress = $IPAddress
+            InterfaceAlias = $InterfaceAlias
+            AddressFamily  = $AddressFamily
         }
     }#Node
 }#Config
+
+HyperVandNetworkingConfig -OutputPath $ConfigPath
+Start-DscConfiguration -Wait -Force -Path $ConfigPath -verbose
