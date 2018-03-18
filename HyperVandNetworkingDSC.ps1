@@ -1,7 +1,6 @@
 Install-Module xPSDesiredStateConfiguration -force
 Install-Module xNetworking -Force
 
-$Nodename = 'localhost'
 Configuration HyperVandNetworkingConfig
 {
     Param(
