@@ -1,7 +1,7 @@
 Install-Module xPSDesiredStateConfiguration -force
 Install-Module xNetworking -Force
 
-
+$Nodename = 'localhost'
 Configuration HyperVandNetworkingConfig
 {
     Param(
@@ -40,7 +40,6 @@ Configuration HyperVandNetworkingConfig
         {
             IPAddress = "192.168.1.0"
             InterfaceAlias = "Ethernet"
-            SubnetMask = "24"
             AddressFamily  = "IPV4"
         }
     }#Node
