@@ -43,5 +43,3 @@ Configuration HyperVandNetworkingConfig
         }
     }#Node
 }#Config
-
-Restart-Computer $Nodename
