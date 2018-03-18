@@ -1,4 +1,4 @@
-﻿Install-Module xPSDesiredStateConfiguration -force
+Install-Module xPSDesiredStateConfiguration -force
 Install-Module xNetworking -Force
 
 
