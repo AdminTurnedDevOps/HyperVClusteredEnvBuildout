@@ -10,16 +10,15 @@ Configuration HyperVandNetworkingConfig
         [string]$Nodename = 'localhost',
 
         [ValidateNotNullOrEmpty()]
-        [string]$IPAddress = '192.168.1.16',
+        [string]$IPAddress
+        [ValidateNotNullOrEmpty()]
+        [string]$InterfaceAlias
 
         [ValidateNotNullOrEmpty()]
-        [string]$InterfaceAlias = 'Ethernet0',
+        [int]$SubnetMask
 
         [ValidateNotNullOrEmpty()]
-        [int]$SubnetMask = '24',
-
-        [ValidateNotNullOrEmpty()]
-        [string]$AddressFamily = 'IPv4'
+        [string]$AddressFamily
 
 
 
