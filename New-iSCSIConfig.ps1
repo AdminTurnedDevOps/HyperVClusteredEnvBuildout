@@ -5,7 +5,7 @@ Function New-iSCSIConfig {
         [string]$LogPath,
         [psobject]$iSCSITargetIPAddress,
         [string]$NodeAddress,
-        [switch]$ErrorLog
+        [string]$ErrorLog
 
     )
     Begin {}
