@@ -20,9 +20,6 @@ Configuration HyperVandNetworkingConfig
         [ValidateNotNullOrEmpty()]
         [string]$AddressFamily
 
-
-
-
     )
     Import-Module PSDesiredStateConfiguration
     Import-module xNetworking
