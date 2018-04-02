@@ -5,7 +5,7 @@ Param (
 )
 $FAPARAMS = @{
               'Name'='Failover-Clustering'
-              'LogPath'='\\NEWCCI-VMFS1\vol1\shared\center\X CCI_ADMIN\TECH SUPPORT\Admin\_ServerConfigLogs\FailoverClusterInstallLog.txt'
+              'LogPath'=
               'Restart'=$true
               'IncludeManagementTools'=$true
               'IncludeAllSubFeature'=$true
