@@ -3,7 +3,7 @@
 Function New-ServerCluster {
     [cmdletbinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
     Param (
-        [Parameter(,Position = 0,
+        [Parameter(Position = 0,
             Mandatory = $true,
             ValueFromPipeline = $true,
             ValueFromPipelineByPropertyName = $true,
