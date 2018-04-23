@@ -3,14 +3,16 @@
 Function New-ServerCluster {
     [cmdletbinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
     Param (
-        [Parameter(Mandatory = $true,
+        [Parameter(,Position = 0,
+            Mandatory = $true,
             ValueFromPipeline = $true,
             ValueFromPipelineByPropertyName = $true,
             HelpMessage = 'Please enter your nodes that you are connecting to your new cluster')]
         [Alias('ComputerName', 'NodeName')]
         [psobject[]]$Node,
 
-        [Parameter(Mandatory = $true,
+        [Parameter(Position = 1,
+            Mandatory = $true,
             HelpMessage = 'Please enter a name for your cluster')]
         [Alias('Cluster', 'Name', 'HAClusterName')]
         [string]$ClusterName
