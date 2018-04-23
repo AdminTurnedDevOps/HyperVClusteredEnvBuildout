@@ -1,10 +1,20 @@
 Function New-iSCSIConfig {
     [cmdletbinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
     Param (
+        [Parameter(Position = 0,
+            Mandatory=$true,
+            ValueFromPipeline=$true)]
+        [ValidateNotNullOrEmpty()
         [psobject]$ComputerName = 'localhost',
+        
+        [Parameter(HelpMessage = 'Please specify a location for your logs')]
         [string]$LogPath,
+        
+        [Parameter(HelpMessage = 'Please specify an IP address for your iSCSI target')]
         [psobject]$iSCSITargetIPAddress,
+        
         [string]$NodeAddress,
+        
         [string]$ErrorLog
 
     )
