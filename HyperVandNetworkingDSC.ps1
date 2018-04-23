@@ -31,14 +31,21 @@ Configuration HyperVandNetworkingConfig
 
         WindowsFeature InstallHyperV
         {
-            Ensure = 'present'
-            Name = 'Hyper-V'
+            Ensure               = 'present'
+            Name                 = 'Hyper-V'
             IncludeAllSubFeature = $true
+        }
+
+        WindowsFeature InstallFailoverClusting
+        {
+            Ensure    = 'Present'
+            Name      = 'Failover-Clustering'
+            DependsOn = "[windowsfeature]Hyper-V"
         }
 
         xIPAddress NewIP
         {
-            IPAddress = $IPAddress
+            IPAddress      = $IPAddress
             InterfaceAlias = $InterfaceAlias
             AddressFamily  = $AddressFamily
         }
