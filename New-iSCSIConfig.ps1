@@ -16,7 +16,6 @@ Function New-iSCSIConfig {
         [string]$NodeAddress,
         
         [string]$ErrorLog
-
     )
     Begin {}
 
