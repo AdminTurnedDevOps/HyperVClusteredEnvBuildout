@@ -2,7 +2,7 @@
 #Install-Module xPSDesiredStateConfiguration -force
 #Install-Module xNetworking -Force
 
-$ConfigPath = (Read-Host 'Please enter a config path')
+$ConfigPath = (Read-Host 'Please enter a DSC config path')
 mkdir -Path $ConfigPath
 Configuration HyperVandNetworkingConfig
 {
