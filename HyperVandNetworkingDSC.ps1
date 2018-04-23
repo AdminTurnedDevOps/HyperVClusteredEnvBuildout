@@ -45,5 +45,5 @@ Configuration HyperVandNetworkingConfig
     }#Node
 }#Config
 
-HyperVandNetworkingConfig -OutputPath $ConfigPath
+Set-DscLocalConfigurationManager -ComputerName $ComputerName -Path $ConfigPath -Verbose -Force
 Start-DscConfiguration -Wait -Force -Path $ConfigPath -verbose
