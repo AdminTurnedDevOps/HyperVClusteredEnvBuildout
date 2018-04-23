@@ -1,5 +1,6 @@
-Install-Module xPSDesiredStateConfiguration -force
-Install-Module xNetworking -Force
+# ** Below are the needed modules. Please install these prior to running the DSC config.
+#Install-Module xPSDesiredStateConfiguration -force
+#Install-Module xNetworking -Force
 
 $ConfigPath = (Read-Host 'Please enter a config path')
 mkdir -Path $ConfigPath
@@ -10,12 +11,13 @@ Configuration HyperVandNetworkingConfig
         [string]$Nodename = 'localhost',
 
         [ValidateNotNullOrEmpty()]
-        [string]$IPAddress
+        [string]$IPAddress,
+        
         [ValidateNotNullOrEmpty()]
-        [string]$InterfaceAlias
+        [string]$InterfaceAlias,
 
         [ValidateNotNullOrEmpty()]
-        [int]$SubnetMask
+        [string]$SubnetMask,
 
         [ValidateNotNullOrEmpty()]
         [string]$AddressFamily
