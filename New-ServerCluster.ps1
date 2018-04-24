@@ -1,19 +1,22 @@
-## ** NOTES ** ##
 #1, Cluster service cannot be started due to machines not currently being in a cluster. If the machines are in a cluster, then they can check the cluster available disks
 Function New-ServerCluster {
-    [cmdletbinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
+    [cmdletbinding(DefaultParameterSetName='ClusterConfig',SupportsShouldProcess = $true, ConfirmImpact = 'High')]
     Param (
-        [Parameter(Position = 0,
+        [Parameter(ParameterSetName='ClusterConfig',
+            Position = 0,
             Mandatory = $true,
             ValueFromPipeline = $true,
             ValueFromPipelineByPropertyName = $true,
             HelpMessage = 'Please enter your nodes that you are connecting to your new cluster')]
+        [ValidateNotNull()]
         [Alias('ComputerName', 'NodeName')]
         [psobject[]]$Node,
 
-        [Parameter(Position = 1,
+        [Parameter(ParameterSetName='ClusterConfig',
+            Position = 1,
             Mandatory = $true,
             HelpMessage = 'Please enter a name for your cluster')]
+        [ValidateNotNull()]
         [Alias('Cluster', 'Name', 'HAClusterName')]
         [string]$ClusterName
     
@@ -21,7 +24,19 @@ Function New-ServerCluster {
     Begin {
         Write-Output 'We will now begin cluster testing to ensure network, storage, connection to AD, and roles are set up properly.' 
         Write-Output 'Please Note: A cluster does not have to be set up prior. Only the role needs to be installed'
-        Write-Output 'Please ensure you put all servers that you want to cluster and test in as comma-separated'    
+        Write-Output 'Please ensure you put all servers that you want to cluster and test in as comma-separated'
+        
+        $TestConnection = Test-Connection $Node
+        IF (-Not($TestConnection)) {
+            Write-Warning 'No connection was established to the specified nodes. Please try again...'
+            Pause
+            Exit
+        }
+
+        ELSE {
+            Write-Output 'Connection to servers established. We will now proceed...'
+            Pause
+        }
     }    
     Process { 
         Try {
@@ -53,7 +68,7 @@ Function New-ServerCluster {
                     }#2
                 }#Switch
             }
-            ###################################################################### Storage Portion Below ####################################################################
+############################################################################### Storage Portion Below ####################################################################
 
             $NewClusterDiskQuestion = Read-Host 'Would you like to get your available disk clusters and add them to your cluster now? Y for yes or N to exit'
             IF ($NewClusterDiskQuestion -like 'y') {
@@ -98,6 +113,7 @@ Function New-ServerCluster {
             Write-Warning 'An error has occursed. Please review the logs in your specified ErrorLog location'
             $_ | Out-File $ErrorLog
             #Throw error to host
+            $_
             Throw                                            
         }
     }#Process
